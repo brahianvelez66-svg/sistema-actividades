@@ -3,6 +3,7 @@ name: Sistema Actividades
 on:
   schedule:
     - cron: '0 12 * * *'
+  workflow_dispatch:
 
 jobs:
   ejecutar:
@@ -20,6 +21,10 @@ jobs:
       - name: Instalar dependencias
         run: |
           pip install gspread oauth2client pandas pywhatkit
+
+      - name: Crear credenciales.json
+        run: |
+          echo '${{ secrets.GOOGLE_CREDENTIALS }}' > credenciales.json
 
       - name: Ejecutar sistema
         run: |
